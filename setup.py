@@ -9,5 +9,7 @@ setup(
     author='Henrique Zanoli',
     author_email='hzanoli@gmail.com',
     description='Simple yaml config loader',
-    install_requires=['PyYAML']
+    install_requires=['PyYAML'],
+    test_requires=['pytest', 'pytest-cov', 'coverage'],
+    test_suite='pytest'
 )

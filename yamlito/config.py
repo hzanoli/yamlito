@@ -49,7 +49,7 @@ def read_config(default: Union[TextIO, dict], custom: Union[TextIO, dict, None] 
 
 
 class Config:
-    """ Class to store configurations.
+    """ Store configurations.
     The configurations are stored as data members, and can be read/written to yaml files.
     The method parse is particularly handy if you store a file with the default configuration and changes it to a custom
     value depending on another file.
@@ -79,4 +79,21 @@ class Config:
     def __repr__(self):
         return ''.join([' <' + str(k) + ':' + repr(v) + '>' for (k, v) in self.__dict__.items()])
 
+    def to_dict(self) -> dict:
+        """
+        Export to a dict. Nested configs are exported as dicts as well.
+        Returns:
+            dict_config: dict with the configuration
+        """
+        dict_config = dict()
+        for key, value in self.__dict__.items():
+            if not isinstance(value, Config):
+                dict_config[key] = value
+            else:
+                dict_config[key] = value.to_dict()
+
+        return dict_config
+
+    def to_yaml(self, file):
+        pass
 

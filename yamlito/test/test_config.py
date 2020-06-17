@@ -127,3 +127,23 @@ def test_config_default_representation(default_parsed_dict):
     assert repr(config.Config.parse(
         default_parsed_dict)) == " <Charm: <label:'Charm Quark'> <mass:1.275> <brothers: " \
                                  "<favorite:['strange', 'bottom']> <evil_twin:'anti-charm'>>>"
+
+
+def test_config_to_dict():
+    complicated_dict_config = {
+        'Charm':
+            {'label': 'Charm Quark',
+             'mass': 1.275,
+             'brothers':
+                 {'favorite': ['strange', 'bottom'],
+                  'evil_twin': 'anti-charm'}},
+        'mystic':
+            {'type':
+                 {'super_nested':
+                      {'hidden': 'nothing',
+                       'deeper':
+                           {'secret':
+                                {'funny': 'over',
+                                 'not_so_funny': 13}}},
+                  'not_so_nested': ''}}}
+    assert config.Config.parse(complicated_dict_config).to_dict() == complicated_dict_config
