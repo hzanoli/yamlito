@@ -94,6 +94,3 @@ class Config:
 
         return dict_config
 
-    def to_yaml(self, file):
-        pass
-
